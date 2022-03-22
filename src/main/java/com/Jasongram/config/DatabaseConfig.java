@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-@MapperScan(basePackages="com.Jasongram.*")  // interface(mapper)가 있는 패키지 경로
+@MapperScan(basePackages="com.Jasongram.*")
 @Configuration
 public class DatabaseConfig {
 

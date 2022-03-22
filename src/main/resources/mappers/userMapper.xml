@@ -11,6 +11,24 @@
 		WHERE
 			`loginId` = #{loginId}
 	</select>
+	
+	<select id="selectUserByLoginIdAndPassword" parameterType="map" resultType="com.Jasongram.user.model.User">
+		SELECT
+			`id`
+			,`loginId`
+			,`password`
+			,`name`
+			,`email`
+			,`profileImagePath`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`user`
+		WHERE
+			`loginId` = #{loginId}
+			AND `password` = #{password}	
+	</select>
+	
 	<insert id="insertUser" parameterType="map">
 		INSERT INTO `user`
 		(
@@ -24,11 +42,11 @@
 		)
 		VALUES
 		(
-			#{}
-			,#{}
-			,#{}
-			,#{}
-			,#{}
+			#{loginId}
+			,#{password}
+			,#{name}
+			,#{email}
+			,NULL
 			,NOW()
 			,NOW()
 		)
