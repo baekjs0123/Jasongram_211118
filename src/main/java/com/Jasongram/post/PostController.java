@@ -21,7 +21,6 @@ public class PostController {
 	public String postListView(Model model) {
 		List<Post> postList = postBO.getPostList();
 		model.addAttribute("postList", postList);
-		
-		return "test/example";
+		return "template/layout";
 	}
 }

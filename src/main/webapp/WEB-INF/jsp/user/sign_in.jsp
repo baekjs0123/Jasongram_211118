@@ -12,14 +12,10 @@
 				<span>비밀번호</span> <input type="password" id="password"
 					name="password" class="form-control col-9 ml-2">
 			</div>
-			<div class="form-inline d-felx justify-content-center buttons pt-3">
-				<div>
-					<a class="btn btn-block btn-dark" href="/user/sign_up_view">회원가입</a>
-				</div>
-				<div>
+			<div class="form-inline d-felx justify-content-between button-box mt-3">
+					<a class="btn btn-dark buttons" href="/user/sign_up_view">회원가입</a>
 					<input type="submit" id="loginBtn"
-						class="btn btn-primary ml-3" value="로그인">
-				</div>
+						class="btn btn-primary buttons" value="로그인">
 			</div>
 		</div>
 	</form>
@@ -51,7 +47,7 @@
 			.done(function(data) {
 				if (data.result == "success") {
 					// 로그인 성공
-					location.href="/post/post_list_view";
+					location.href="/timeline/timeline_view";
 				} else {
 					alert(data.error_message);
 				}

@@ -4,7 +4,7 @@
 
 <div class="gnb d-flex justify-content-between">
 	<div class="logo d-flex align-items-center">
-		<h1>Jasongram</h1>
+		<h1 class="mt-3">Jasongram</h1>
 	</div>
 	<div class="login-info">
 		<c:if test="${not empty userName}">

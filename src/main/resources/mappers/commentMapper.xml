@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.Jasongram.post.dao.PostDAO">
-	<select id="selectPostList"
-		resultType="com.Jasongram.post.model.Post">
+ 
+<mapper namespace="com.Jasongram.comment.dao.CommentDAO">
+	<select id="selectCommentListByPostId" parameterType="int" resultType="com.Jasongram.comment.model.Comment">
 		SELECT
 			`id`
+			,`postId`
 			,`userId`
 			,`content`
-			,`imagePath`
 			,`createdAt`
 			,`updatedAt`
 		FROM
-			`post`
-		ORDER BY 
-			`id` DESC
+			`comment`
+		WHERE
+	 		postId = #{postId}
 	</select>
 	
-	<insert id="insertPost" parameterType="map">
-		INSERT INTO `post`
+	<insert id="createComment" parameterType="map">
+		INSERT INTO `comment`
 		(
-			`userId`
+			`postId`
+			,`userId`
 			,`content`
-			,`imagePath`
 			,`createdAt`
 			,`updatedAt`
 		)
 		VALUES
 		(
-			#{userId}
+			#{postId}
+			,#{userId}
 			,#{content}
-			,#{imagePath}
 			,NOW()
 			,NOW()
 		)
-	
 	</insert>
 </mapper>

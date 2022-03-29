@@ -5,7 +5,7 @@ import java.util.Date;
 public class User {
 
 	private int id;
-	private int loginId;
+	private String loginId;
 	private String password;
 	private String name;
 	private String email;
@@ -19,10 +19,10 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getLoginId() {
+	public String getLoginId() {
 		return loginId;
 	}
-	public void setLoginId(int loginId) {
+	public void setLoginId(String loginId) {
 		this.loginId = loginId;
 	}
 	public String getPassword() {
