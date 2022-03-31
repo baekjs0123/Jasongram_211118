@@ -17,6 +17,21 @@
 		ORDER BY 
 			`id` DESC
 	</select>
+	
+	<select id="selectPostByPostId" parameterType="com.Jasongram.post.model.Post"
+		resultType="com.Jasongram.post.model.Post">
+		SELECT
+			`id`
+			,`userId`
+			,`content`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+	</select>
 
 	<select id="selectPostCountByUserId" parameterType="int"
 		resultType="int">
@@ -47,4 +62,13 @@
 		)
 	
 	</insert>
+	
+	<delete id="deletePost" parameterType="map">
+		DELETE
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+			AND `userId` = #{userId}
+	</delete>
 </mapper>

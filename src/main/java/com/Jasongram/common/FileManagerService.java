@@ -37,4 +37,22 @@ public class FileManagerService {
 		// http://localhost/images/baekjs0123_16205748673/sun.png
 		return "/images/" + directoryName + file.getOriginalFilename();
 	}
+	
+	public void deleteFile(String imagePath) throws IOException {
+		// C:\\Users\\baekj\\Desktop\\6_spring_project\\ex_memo\\workspace\\images/
+		// /images/aaaa_1648032101643/Spring_quiz.PNG
+		// -> 제거: /images/
+		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
+		
+		// 이미지 삭제
+		if (Files.exists(path)) {
+			Files.delete(path);
+		}
+		
+		// 디렉토리 삭제
+		path = path.getParent();
+		if (Files.exists(path)) {
+			Files.delete(path);
+		}
+	}
 }

@@ -18,11 +18,17 @@
 	</c:if>
 	<c:forEach items="${cardViewList}" var="card">
 		<div class="card border rounded mt-3">
+		
+		<%-- 글쓴이명, 삭제버튼 --%>
 			<div class="userId-box d-flex justify-content-between">
-				<span>${card.user.name}</span>
-				<a href="#" class="more-btn">
+				<span class="font-weight-bold">${card.user.name}</span>
+				
+				<%-- 글쓴이와 로그인된 사용자가 같을 경우 더보기 아이콘 노출 --%>
+				<c:if test="${card.user.id eq userId}">
+				<a href="#" class="more-btn" data-toggle="modal" data-target="#moreModal" data-post-id="${card.post.id}">
 					<img src="/snsImages/more-icon.png" alt="더보기 아이콘" width="30px">
 				</a>
+				</c:if>
 			</div>
 			
 			<%-- 이미지 --%>
@@ -57,6 +63,8 @@
 					<div class="ml-3 mb-1 font-weight-bold">댓글</div>
 				</div>
 				<div class="card-comment-list m-2">
+				
+				<%-- 댓글 리스트 --%>
 				<c:forEach var="commentView" items="${card.commentList}">
 					<div class="card-comment m-1">
 						<span class="font-weight-bold">${commentView.user.name} </span>
@@ -81,6 +89,25 @@
 		</div>
 	</c:forEach>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="moreModal">
+	<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="text-center">
+				<div class="my-3">
+					<a href="#" id="postDeleteBtn" class="d-block">삭제하기</a>
+				</div>
+				<hr>
+				<div class="my-3">
+					<a href="#" class="d-block" data-dismiss="modal">취소</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
 $(document).ready(function() {
 	// 파일 업로드 이미지 버튼 클릭 => 파일 선택 창이 떠야함
@@ -215,5 +242,37 @@ $(document).ready(function() {
 		});
 	});
 	
+	// 카드에서 더보기(...) 클릭할 때 삭제될 글 번호를 모달에 넣어준다.
+	$('.more-btn').on('click', function() {
+		let postId = $(this).data('post-id');
+		//alert(postId);
+		
+		$('#moreModal').data('post-id', postId); // data-post-id="1"
+	});
+	
+	// 모달창 안에 있는 '삭제하기' 글자 클릭
+	$('#moreModal #postDeleteBtn').on('click', function(e) {
+		e.preventDefault();
+		
+		let postId = $('#moreModal').data('post-id');
+		//alert(postId);
+		
+		$.ajax({
+			type:"DELETE"
+			, url:"/post/delete"
+			, data: {"postId":postId}
+			, success:function(data) {
+				if (data.result == "success") {
+					location.reload();
+				} else {
+					alert(data.error_message);
+				}
+				
+			}
+			, error:function(e) {
+				alert("삭제하는데 실패했습니다. 관리자에게 문의해주세요.");
+			}
+		});
+	});
 });
 </script>

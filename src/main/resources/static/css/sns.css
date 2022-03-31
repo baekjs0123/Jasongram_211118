@@ -11,7 +11,8 @@
 .buttons {width: 100px;}
 
 .userId-box {width: 700px; height: 25px; background-color: WhiteSmoke;}
-a {text-decoration-line: none;}
+a {text-decoration-line: none; color:#000;}
+a:hover {text-decoration:none; color:#000;}
 
 .my-profile-box {height: 170px;}
 .profile-img-box{width: 150px; height: 150px; border-radius: 70%; overflow: hidden;}
