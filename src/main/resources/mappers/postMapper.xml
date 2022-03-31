@@ -17,6 +17,16 @@
 		ORDER BY 
 			`id` DESC
 	</select>
+
+	<select id="selectPostCountByUserId" parameterType="int"
+		resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`post`
+		WHERE 
+ 			`userId` = #{userId}
+	</select>
 	
 	<insert id="insertPost" parameterType="map">
 		INSERT INTO `post`

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<section class="contents">
+<section class="contents-sign-in">
 	<h2 class="mt-3 font-weight-bold">로그인</h2>
 	<form id="loginForm" action="/user/sign_in" method="post">
 		<div class="login-box">

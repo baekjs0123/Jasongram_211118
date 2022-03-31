@@ -21,8 +21,8 @@ public class CommentBO {
 	@Autowired
 	private UserBO userBO;
 	
-	public int createComment(int postId, int userId, String content) {
-		return commentDAO.createComment(postId, userId, content);
+	public void createComment(int userId, int postId, String content) {
+		commentDAO.insertComment(userId, postId, content);
 	}
 	
 	public List<Comment> getCommentListByPostId(int postId) {
@@ -42,7 +42,7 @@ public class CommentBO {
 			// 댓글쓴이
 			User user = userBO.getUserByUserId(comment.getUserId());
 			commentView.setUser(user);
-		
+			
 			resultList.add(commentView);
 		}
 		

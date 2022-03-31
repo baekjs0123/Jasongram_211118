@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<section class="contents">
+<section class="contents-sign-up">
 	<h2 class="mt-3 font-weight-bold">회원가입</h2>
 	<form id="signUpForm" method="post" action="/user/sign_up">
 		<div class="sign-up-box">

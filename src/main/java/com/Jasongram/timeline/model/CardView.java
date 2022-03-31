@@ -17,6 +17,9 @@ public class CardView {
 	// 로그인 된 사용자가 좋아요 눌렀는지 여부
 	private boolean filledLike;
 	
+	public void setFilledLike(boolean filledLike) {
+		this.filledLike = filledLike;
+	}
 	public int getCount() {
 		return count;
 	}

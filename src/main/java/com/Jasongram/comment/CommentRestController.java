@@ -19,13 +19,15 @@ public class CommentRestController {
 	@Autowired
 	private CommentBO commentBO;
 	
-	@PostMapping("/create")	
-	public Map<String, Object> create(
+	@PostMapping("/create")
+	public Map<String, Object> createComment(
 			@RequestParam("postId") int postId,
 			@RequestParam("content") String content,
 			HttpServletRequest request) {
 		
 		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
 		if (userId == null) {
@@ -34,13 +36,8 @@ public class CommentRestController {
 			return result;
 		}
 		
-		int row = commentBO.createComment(postId, userId, content);
+		commentBO.createComment(userId, postId, content);
 		
-		if (row > 0) {
-			result.put("result", "success");
-		} else {
-			result.put("result", "error");
-		}
 		return result;
 	}
 }

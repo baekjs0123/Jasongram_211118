@@ -27,7 +27,7 @@
 			
 			<%-- 이미지 --%>
 			<div class="card-img">
-				<img src="${card.post.imagePath}" alt="사진" width="500px">
+				<img src="${card.post.imagePath}" alt="사진" width="700px">
 			</div>
 			
 			<%-- 좋아요 --%>
@@ -74,8 +74,8 @@
 			</c:if>
 			<c:if test="${not empty userId}">
 				<div class="comment-write d-flex border-top mt-2">
-					<input type="text" id="comment${post.id}" class="form-control border-0 mr-2" placeholder="댓글 달기..."/> 
-					<button type="button" class="commentBtn btn btn-light text-info" data-post-id="${post.id}">게시</button>
+					<input type="text" id="comment${card.post.id}" class="form-control border-0 mr-2" placeholder="댓글 달기..."/> 
+					<button type="button" class="commentBtn btn btn-light text-info" data-post-id="${card.post.id}">게시</button>
 				</div>
 			</c:if>
 		</div>
@@ -139,14 +139,14 @@ $(document).ready(function() {
 			, contentType: false // 파일 업로드를 위한 필수 설정
 			, success: function(data) {
 				if (data.result == "success") {
-					alert("메모가 저장되었습니다.");
+					alert("게시글이 저장되었습니다.");
 					location.href = "/timeline/timeline_view";
 				} else {
 					alret(data.error_message);
 				}
 			}
 			, error: function(e) {
-				alert("메모 저장에 실패했습니다. 관리자에게 문의 해주세요.");
+				alert("게시글 저장에 실패했습니다. 관리자에게 문의 해주세요.");
 			}
 		});
 	});

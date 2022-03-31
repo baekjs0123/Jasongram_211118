@@ -11,8 +11,8 @@ import com.Jasongram.comment.model.Comment;
 public interface CommentDAO {
 	public List<Comment> selectCommentListByPostId(int postId);
 	
-	public int createComment(
-			@Param("postId") int postId,
-			@Param("userId") int userId,
+	public int insertComment(
+			@Param("userId") int userId, 
+			@Param("postId") int postId, 
 			@Param("content") String content);
 }

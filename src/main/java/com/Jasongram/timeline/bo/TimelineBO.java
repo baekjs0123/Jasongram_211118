@@ -56,6 +56,7 @@ public class TimelineBO {
 			// 좋아요 수
 			card.setCount(likeBO.getLikeCountByPostId(post.getId()));
 			cardViewList.add(card);
+			
 		}
 		
 		return cardViewList;

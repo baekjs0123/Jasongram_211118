@@ -12,6 +12,8 @@ public interface PostDAO {
 
 	public List<Post> selectPostList();
 	
+	public int selectPostCountByUserId(int userId);
+	
 	public int insertPost(
 			@Param("userId") int userId,
 			@Param("content") String content,

@@ -17,19 +17,19 @@
 	 		postId = #{postId}
 	</select>
 	
-	<insert id="createComment" parameterType="map">
+	<insert id="insertComment" parameterType="map">
 		INSERT INTO `comment`
 		(
-			`postId`
-			,`userId`
+			`userId`
+			,`postId`
 			,`content`
 			,`createdAt`
 			,`updatedAt`
 		)
 		VALUES
 		(
-			#{postId}
-			,#{userId}
+			#{userId}
+			,#{postId}
 			,#{content}
 			,NOW()
 			,NOW()

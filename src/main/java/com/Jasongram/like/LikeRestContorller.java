@@ -37,7 +37,7 @@ public class LikeRestContorller {
 			return result;
 		}
 		
-		likeBO.like(postId, postId);
+		likeBO.like(postId, userId);
 		result.put("result", "success");
 		return result;
 	}
