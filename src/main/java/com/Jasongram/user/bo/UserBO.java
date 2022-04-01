@@ -41,6 +41,22 @@ public class UserBO {
 	public int updateUserProfileImagePathByUserId(int userId, MultipartFile file) {
 		String profileImagePath = null;
 		
+		// select user
+		User user = getUserByUserId(userId);
+		String existingprofileImagePath = user.getProfileImagePath();
+		
+		// user profileImagePath null 검사 => null이 아니면 기존 이미지 삭제
+		if (existingprofileImagePath != null) {
+			// 기존 이미지 삭제
+			try {
+				fileManagerService.deleteFile(user.getProfileImagePath());
+			} catch (IOException e) {
+				logger.error("[delete user] 이미지 삭제 실패. userId:{}", userId);
+				return 0;
+			}		
+		}
+		
+		// 새로운 이미지 업로드
 		try {
 			profileImagePath = fileManagerService.saveFile(userId, file);
 		} catch (IOException e) {
