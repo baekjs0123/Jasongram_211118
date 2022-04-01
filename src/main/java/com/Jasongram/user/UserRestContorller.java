@@ -69,6 +69,13 @@ public class UserRestContorller {
 		
 	}
 	
+	/**
+	 * 로그인
+	 * @param loginId
+	 * @param password
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/sign_in")
 	public Map<String, Object> signIn(
 			@RequestParam("loginId") String loginId,
@@ -99,5 +106,4 @@ public class UserRestContorller {
 		
 		return result;
 	}
-	
 }

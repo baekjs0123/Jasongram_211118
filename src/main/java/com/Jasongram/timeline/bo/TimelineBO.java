@@ -30,7 +30,7 @@ public class TimelineBO {
 	@Autowired
 	private LikeBO likeBO;
 	
-	// 타임라인 회면의 경우 비로그인일대도 보여져야 하므로 Integer userId
+	// 타임라인 화면의 경우 비로그인일때도 보여져야 하므로 Integer userId
 	public List<CardView> generateCardViewList(Integer userId) {
 		List<CardView> cardViewList = new ArrayList<>();
 		

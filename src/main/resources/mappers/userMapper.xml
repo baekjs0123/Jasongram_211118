@@ -67,4 +67,20 @@
 			,NOW()
 		)
 	</insert>
+	
+	<update id="updateUserProfileImagePathByUserId" parameterType="map">
+		UPDATE `user`
+		SET 
+			`profileImagePath` = #{profileImagePath}
+		WHERE 
+			`id` = #{userId}
+	</update>
+
+	<update id="deleteUserProfileImagePathByUserId" parameterType="int">
+		UPDATE `user`
+		SET 
+			`profileImagePath` = NULL
+		WHERE 
+			`id` = #{userId}
+	</update>
 </mapper>

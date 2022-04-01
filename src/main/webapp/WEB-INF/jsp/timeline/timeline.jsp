@@ -21,7 +21,9 @@
 		
 		<%-- 글쓴이명, 삭제버튼 --%>
 			<div class="userId-box d-flex justify-content-between">
-				<span class="font-weight-bold">${card.user.name}</span>
+				<a href="/profile/profile_view?userId=${card.user.id}" class="font-weight-bold">
+					${card.user.name}
+				</a>
 				
 				<%-- 글쓴이와 로그인된 사용자가 같을 경우 더보기 아이콘 노출 --%>
 				<c:if test="${card.user.id eq userId}">
@@ -53,7 +55,9 @@
 			
 			<%-- 글(Post) --%>
 			<div class="card-post m-3">
-				<span class="font-weight-bold">${card.user.name}</span>
+				<a href="/profile/profile_view?userId=${card.user.id}" class="font-weight-bold">
+					${card.user.name}
+				</a>
 				<span>
 					${card.post.content}
 				</span>
@@ -67,12 +71,14 @@
 				<%-- 댓글 리스트 --%>
 				<c:forEach var="commentView" items="${card.commentList}">
 					<div class="card-comment m-1">
-						<span class="font-weight-bold">${commentView.user.name} </span>
+						<a href="/profile/profile_view?userId=${commentView.comment.userId}" class="font-weight-bold">
+							${commentView.user.name}
+						</a>
 						<span>${commentView.comment.content}</span>
 						
-						<%-- TODO: 댓글쓴이가 본인이면 삭제버튼 노출 --%>
+						<%-- 댓글쓴이가 본인이면 삭제버튼 노출 --%>
 						<c:if test="${commentView.user.id eq userId}">
-							<a href="#">
+							<a href="#" class="commentDeleteBtn" data-comment-id="${commentView.comment.id}">
 								<img src="/snsImages/garbagecan-icon.png" alt="삭제하기" width="15px">
 							</a>
 						</c:if>
@@ -209,6 +215,33 @@ $(document).ready(function() {
 			}
 			
 		});
+	});
+	
+	// 댓글 삭제
+	$('.commentDeleteBtn').on('click', function(e) {
+		e.preventDefault();
+		
+		let commentId = $(this).data('comment-id');
+		//alert(commentId);
+		
+		$.ajax({
+			type:"DELETE"
+			, url:"/comment/delete"
+			, data: {"commentId":commentId}
+			, success:function(data) {
+				if (data.result == "success") {
+					//alert("댓글 삭제 성공");
+					location.reload();
+				} else {
+					alert(data.error_message);
+				}
+				
+			}
+			, error:function(e) {
+				alert("삭제하는데 실패했습니다. 관리자에게 문의해주세요.");
+			}
+		});
+		
 	});
 	
 	// 좋아요 버튼 클릭

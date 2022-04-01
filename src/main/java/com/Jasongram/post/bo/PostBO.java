@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Jasongram.comment.bo.CommentBO;
-import com.Jasongram.comment.model.Comment;
 import com.Jasongram.common.FileManagerService;
 import com.Jasongram.like.bo.LikeBO;
 import com.Jasongram.post.dao.PostDAO;
@@ -52,7 +51,7 @@ public class PostBO {
 			try {
 				imagePath = fileManagerService.saveFile(userId, file);
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error("[postBO addPost] 이미지 업로드 실패 userId:{}", userId);
 			}
 			
 		}
@@ -83,17 +82,10 @@ public class PostBO {
 		postDAO.deletePost(postId, userId);
 		
 		// 댓글들 삭제
-		List<Comment> commentList = commentBO.getCommentListByPostId(postId);
-		if (commentList != null) {
-			commentBO.deleteCommentListByPostId(postId);
-		}
-		
+		commentBO.deleteCommentListByPostId(postId);
 		
 		// 좋아요들 삭제 byPostId
-		int likeCount = likeBO.getLikeCountByPostId(postId);
-		if (likeCount > 0) {
-			likeBO.deleteLikeByPostId(postId);
-		}
+		likeBO.deleteLikeByPostId(postId);
 		
 		return 1;
 	}

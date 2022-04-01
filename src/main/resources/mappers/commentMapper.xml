@@ -36,6 +36,15 @@
 		)
 	</insert>
 	
+	<delete id="deleteComment" parameterType="map">
+		DELETE
+		FROM
+			`comment`
+		WHERE
+			`id` = #{commentId}
+			AND `userId` = #{userId}
+	</delete>
+	
 	<delete id="deleteCommentListByPostId" parameterType="int">
 		DELETE
 		FROM

@@ -54,7 +54,12 @@ public class PostRestController {
 		
 		return result;
 	}
-	
+	 /**
+	  * 글 삭제
+	  * @param postId
+	  * @param session
+	  * @return
+	  */
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(
 			@RequestParam("postId") int postId,
@@ -71,8 +76,7 @@ public class PostRestController {
 			return result;
 		}
 		
-		
-		// TODO delete DB
+		// DB postBO
 		int row = postBO.deletePost(postId, userId);
 		if (row < 1) {
 			result.put("result", "error");
