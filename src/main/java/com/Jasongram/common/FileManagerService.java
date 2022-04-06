@@ -31,11 +31,12 @@ public class FileManagerService {
 		// 파일 업로드: byte 단위로 업로드 한다.
 		byte[] bytes = file.getBytes();
 		// C:\\Users\\baekj\\Desktop\\6_spring_project\\quiz_sns\\workspace\\images/baekjs0123_16205748673/sun.png
-		Path path = Paths.get(filePath + file.getOriginalFilename());
+		String fileName =  file.getOriginalFilename().replaceAll(" ", "");
+		Path path = Paths.get(filePath + fileName);
 		Files.write(path, bytes);
 		
 		// http://localhost/images/baekjs0123_16205748673/sun.png
-		return "/images/" + directoryName + file.getOriginalFilename();
+		return "/images/" + directoryName + fileName;
 	}
 	
 	public void deleteFile(String imagePath) throws IOException {

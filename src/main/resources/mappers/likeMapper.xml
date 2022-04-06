@@ -15,6 +15,15 @@
  			</if>
 	</select>
 	
+	<select id="selectLikeCountByPostId" parameterType="int" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+	</select>
+	
 	<insert id="insertLike" parameterType="map">
 		INSERT INTO `like`
  		(
@@ -35,8 +44,8 @@
 		FROM
 			`like`
 		WHERE
-			postId = #{postId}
-			AND userId = #{userId}
+			`postId` = #{postId}
+			AND `userId` = #{userId}
 	</delete>
 	
 	<delete id="deleteLikeByPostId" parameterType="int">
@@ -44,6 +53,6 @@
 		FROM
 			`like`
 		WHERE
-			postId = #{postId}
+			`postId` = #{postId}
 	</delete>
 </mapper>

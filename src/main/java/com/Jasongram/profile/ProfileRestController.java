@@ -53,6 +53,12 @@ public class ProfileRestController {
 		return result;
 	}
 	
+	/**
+	 * 프로필 이미지 삭제
+	 * @param userId
+	 * @param session
+	 * @return
+	 */
 	@PutMapping("/delete_profile_image")
 	public Map<String, Object> deleteProfileImage(
 			@RequestParam("userId") int userId,

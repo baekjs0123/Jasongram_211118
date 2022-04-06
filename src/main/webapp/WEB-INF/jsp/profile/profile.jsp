@@ -36,8 +36,14 @@
 			<h3>${user.loginId}</h3>
 			<div class="mt-4">
 				<span>게시물 ${postCount}</span>
-				<span>팔로워 1</span>
-				<span>팔로우 1</span>
+				<span>팔로워 ${followerCount}</span>
+				<span>팔로우 ${followCount}</span>
+				<c:if test="${user.id ne userId && followState}">
+					<button type="button" id="followBtn" class="btn btn-primary ml-3" data-user-id="${user.id}">팔로우</button>
+				</c:if>
+				<c:if test="${user.id ne userId && followState eq false}">
+					<button type="button" id="followDeleteBtn" class="btn btn-danger ml-3" data-user-id="${user.id}">팔로우 취소</button>
+				</c:if>
 			</div>
 			<div class="mt-4">
 				<span class="font-weight-bold">${user.name}</span>
@@ -170,6 +176,50 @@ $(document).ready(function() {
 			, error:function(e) {
 				alert("사진을 삭제하는데 실패했습니다. 관리자에게 문의해주세요.");
 			}
+		});
+	});
+	
+	$('#followBtn').on('click', function() {
+		//alert("팔로우 버튼");
+		let userId = $('#followBtn').data('user-id');
+		//alert(userId);
+		$.ajax({
+			type: "post"
+			, url:"/follow/follow"
+			, data: {"userId":userId}
+			, success:function(data) {
+				if (data.result == "success") {
+					//alert("팔로우 성공!");
+					location.reload();
+				} else {
+					alert(data.error_message);
+				}
+			}
+			, error:function(e) {
+				alert("팔로우하는데 실패했습니다. 관리자에게 문의해주세요.");
+			}
+		});
+	});
+	
+	$('#followDeleteBtn').on('click', function() {
+		//alert("팔로우 취소 버튼");
+		let userId = $('#followDeleteBtn').data('user-id');
+		//alert(userId);
+		$.ajax({
+			type: "delete"
+			, url:"/follow/follow_delete"
+			, data: {"userId":userId}
+			, success:function(data) {
+				if (data.result == "success") {
+					//alert("팔로우 취소 성공!");
+					location.reload();
+				} else {
+					alert(data.error_message);
+				}
+			}
+			, error:function(e) {
+				alert("팔로우 취소 하는데 실패했습니다. 관리자에게 문의해주세요.");
+			} 
 		});
 	});
 });
